@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+
+  <!--Font google Ubuntu-->
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  
+  <title>Frontend Mentor | Multi-step form</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar start -->
+  <div class="container d-flex align-items-center justify-content-center">
+    <div class="form d-flex align-items-center">
+      <div class="form__left">
+        <div class="formSteps">
+
+          <div class="formSteps__list d-flex align-items-center active" type="info">
+            <h4>1</h4>
+            <div class="formSteps__list__box">
+              <span>Step 1</span>
+              <p>Your info</p>
+            </div>
+          </div>
+
+          <div class="formSteps__list d-flex align-items-center" type="plans" >
+            <h4>2</h4>
+            <div class="formSteps__list__box">
+              <span>Step 2</span>
+              <p> Select plan</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--step 1-->
+      <div class="form__right step1Box ">
+        <div class="info" for="info">
+          <h2> Personal info</h2>
+          <h4>  Please provide your name, email address, and phone number.</h4>
+
+          <div class="info__label d-flex flex-column">
+            <!--Name-->
+            <fieldset>
+              <label for="name" type="text">Name</label>
+              <input class="step1" name="name"></input>
+              <span id="nameError1">Name Required</span>
+              <span id="nameError2">Name must have 3 or more characters</span>
+              <span id="nameError3">Special characters are not allowed!</span>
+            </fieldset>
+            <!--Name-->
+
+            <!--Email Adress-->
+            <fieldset>
+              <label for="email">Email</label>
+              <input class="step1" name="email" type="email"></input>
+              <span id="emailError">Insert a valid email!</span>
+            </fieldset>
+            <!--Email Adress-->
+
+
+            <!--Phone Number-->
+            <fieldset>
+              <label for="phone">Phone Number</label>
+              <input class="step1" name="phone" type="tel"></input>
+              <span id="phoneError">Insert a valid phone number! *(no special characters allowed)</span>
+            </fieldset>
+            <!--Phone Number-->
+
+
+            <div class="info__label__buttons d-flex align-items-center justify-content-between">
+              <button class="nextStep" id="nextStep1" to="info">Next Step</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Step 2-->
+      <div class="form__right step2Box d-none">
+        <div class="plans" status="active" for="info">
+          <h2>Select your plan</h2>
+          <h4>You have the option of monthly or yearly billing.</h4>
+
+          <div class="plans__box d-flex justify-content-between">
+
+            <!--Arcade plan-->
+            <label for="arcade">
+              <input class='plan' type="checkbox"  name="arcade" id="arcade" >
+              <div class="planBox">
+                <img src="assets/images/icon-arcade.svg" alt="">
+                <div class="planBox__info">
+                  <h6>Arcade</h6>
+                  <span>$9/month</span>
+                </div>
+              </div>
+            </label>
+            <!--Arcade plan end-->
+
+            <!--Advanced plan-->
+            <label for="advanced">
+              <input class='plan'type="checkbox"  name="advanced" id="advanced">
+              <div class="planBox">
+                <img src="assets/images/icon-advanced.svg" alt="">
+                <div class="planBox__info">
+                  <h6>Advanced</h6>
+                  <span>$12/month</span>
+                </div>
+              </div>
+            </label>
+            <!--Advanced plan end-->
+
+            <!--Pro plan-->
+            <label for="pro">
+              <input class='plan' type="checkbox" name="pro" id="pro">
+              <div class="planBox">
+                <img src="assets/images/icon-pro.svg" alt="">
+                <div class="planBox__info">
+                  <h6>Pro</h6>
+                  <span>$15/month</span>
+                </div>
+              </div>
+            </label>
+            <!--Pro plan end-->
+          </div>
+
+          <!--Montly/Year button-->
+          <div class="plans__monthly">
+            <label for="monthly">
+              <input type="checkbox" id="monthly">
+              <span id="monthlyChoice" class="choosed">Monthly</span>
+              <div class="radioButton"></div>
+              <span id="yearlyChoice">Yearly</span>
+            </label>
+          </div>
+          <!--Montly/Year button-->
+          <div class="info__label__buttons d-flex align-items-center justify-content-between">
+            <button class="goBack"action="resetInfo">Go Back</button>
+            <button class="nextStep" id="finish" to="info">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/main.js"></script>
+</body>
+</html>

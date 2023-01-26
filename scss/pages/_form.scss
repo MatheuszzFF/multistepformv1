@@ -1,0 +1,340 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: $white;
+    font-family: $family;
+}
+
+.form {
+    background-color: $white3;
+    border-radius: 12px;
+    padding: 8px;
+    width: 900px;
+
+    &__left {
+        border-radius: 12px;
+        background: {
+            image: url('assets/images/bg-sidebar-desktop.svg');
+            position: 44% 80%;
+            size: cover;
+            repeat: no-repeat;
+        }
+        height: 100%;
+        padding: 80px ;
+
+        @media(min-width: 801px) {
+            background-position: center center;
+            width: 33%;
+            max-width: 33%;
+            padding: 30px;
+            height: 400px;
+        }
+
+        .formSteps {
+            .formSteps__list {
+                h4 {
+                    color: $white2;
+                    padding: 14px;
+                    border: 1px solid $white2;
+                    border-radius: 54%;
+                    font-size: 16px;
+                    margin-right: 21px;
+                    line-height: 7px;
+                }
+
+                &__box {
+                    span {
+                        text-transform: uppercase;
+                        color: $gray2;
+                    }
+
+                    p {
+                        font-size: $fontSize;
+                        color: $white3;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        font-weight: $fontBold;
+                    }
+
+                    @media(max-width: 800px) {
+                        display: none;
+                    }
+                }
+
+                @media (min-width: 801px) {
+                    + div {
+                        margin-top: 30px;
+                    }
+                }
+
+                &.active {
+                    h4 {
+                        color: $blue1;
+                        background-color: $blue4;
+                    }
+                }
+            }
+
+            @media(max-width: 800px) {
+                display: flex;
+                justify-content: center;
+                margin-top: -40px;
+            }
+        }
+
+        @media(max-width: 800px) {
+            width: 100%;
+        }
+    }
+
+    &__right {
+        padding: 20px 40px;
+        height: 100%;
+        width: 77%;
+        background-color: $white3;
+
+        @media(min-width: 801px) {
+            padding: 30px 60px;
+        }
+
+        h2 {
+            font-size: 26px;
+            color: $blue1;
+            margin-bottom: 8px;
+        }
+
+        h4 {
+            font-size: $fontSize;
+            font-weight: $fontRegular;
+            color: $gray;
+            margin-bottom: 20px;
+        }
+
+        .info {
+            border: none;
+
+            
+            &__label {
+                fieldset {
+                    border: none;
+                }
+                label {
+                    display: block;
+                    color: $blue1;
+                    font-weight: $fontRegular;
+                    margin-bottom: 10px;
+                    height: 100%;
+                }
+    
+                input {
+                    width: 250px;
+                    height: 30px;
+                    outline: none;
+                    border: 1px solid $blue3;
+                    background-color: $white;
+                    padding: 0 20px;
+                    font-size: $fontSize;
+                    color: $gray;
+                    border-radius: 10px;
+                    margin-bottom: 20px;
+                }
+
+                &__buttons {
+                    $padding: 8px 12px;
+                    $radius: 6px;
+                    margin-top: 30px;
+
+                    .nextStep, .goBack {
+                        padding: $padding;
+                        border-radius: $radius;
+                        border: none;
+                        background-color: $blue1;
+                        color: $white3;
+                        cursor: pointer;
+                        transition: .3s ease-in;
+                        margin-left: auto;
+                        font-weight: $fontSemiBold;
+
+                        &:hover {
+                            opacity: .8;
+                        }
+                    }
+
+                    .goBack {
+                        margin: 0;
+                        color: $gray;
+                        background-color: $white2;
+                    }
+                }
+
+                span {
+                    display: none;
+                    &.show {
+                        display: block;
+                    }
+                }
+
+            }
+        }
+
+        .plans {
+            height: 100%;
+
+            &__box {
+                margin-top: 40px;
+
+                label {
+                    width: 30%;
+                    height: auto;
+
+                    @media(max-width: 800px) {
+                        width: 100%;
+                        margin-bottom: 15px;
+                    }
+                }
+    
+                input[type="checkbox"] {
+                    display: none;
+    
+                    &:checked {
+                        ~ .planBox {
+                            border:1px solid $blue2;
+                        } 
+                    }
+                }
+    
+                .planBox {
+                    display: flex;
+                    box-shadow: -1px 2px 6px $gray;
+                    border-radius: 10px;
+                    padding: 15px;
+                    transition: .3s;
+                    cursor: pointer;
+                    @media(min-width: 801px) {
+                        flex-direction: column;
+                        justify-content: space-between;
+                        height: 150px;
+                    }
+
+                    img {
+                        width: 40px;
+                    }
+
+                    &__info {
+                        h6 {
+                            font-size: $fontSize;
+                            color: $blue1;
+                            font-weight: $fontSemiBold;
+                            margin-bottom: 8px;
+                        }
+
+                        span {
+                            font-size: $fontSize;
+                            color: $blue3;
+                        }
+
+                        @media(max-width: 800px) {
+                            margin-left: 15px;
+                        }
+                    }
+                    
+                }
+
+                @media(max-width: 800px) {
+                    flex-direction: column;
+                    width: 100%;
+                }
+            }
+
+            &__monthly {
+                width: 100%;
+                height: 40px;
+                background-color: $white;
+                border-radius: 8px;
+                margin-top: 30px;
+               
+                
+                label {
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    input[type="checkbox"] {
+                        display: none;
+
+                        &:checked {
+                            ~ #yearlyChoice {
+                                color: $blue2;
+                            }
+
+                            ~ #monthlyChoice {
+                                color: $gray;
+                            }
+                            ~ .radioButton {
+                                background-color: $blue2;
+                                &::before{
+                                    left: 18px;
+                                }
+                            }
+                            
+                        }
+                    }
+
+                    span {
+                        font-weight: $fontSemiBold;
+                        color: $gray;
+                        transition: .3s;
+                    }
+
+                    #monthlyChoice {
+                        color: $blue1;
+                    }
+    
+                    
+                    .radioButton {
+                        cursor: pointer;
+                        position: relative;
+                        border-radius: 11px;
+                        height: 17px;
+                        width: 30px;
+                        background-color: $blue1;
+                        margin: 0 30px;
+                        transition: .3s;
+
+                        &::before {
+                            content: "";
+                            background-color: $white3;
+                            height: 11px;
+                            width: 10px;
+                            position: absolute;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            left: 3px;
+                            border-radius: 50%;
+                            transition: .3s;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.d-none {
+            display: none;
+        }
+
+        @media(max-width: 800px) {
+            margin-top: -50px;
+            border-radius: 14px;
+            padding-bottom: 40px;
+            width: 86%;
+        }   
+    }
+    @media(max-width: 800px) {
+        flex-direction: column;
+    }   
+}
