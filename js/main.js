@@ -94,7 +94,6 @@ function goBackListener(actualStep, actualStepLeft, backStep, backStepLeft) {
         actualStepLeft.classList.remove('active');
         backStep.classList.remove('d-none');
         backStepLeft.classList.add('active');
-        console.log(actualStepLeft.classList.remove('active'));
 
         initForm();
     })
