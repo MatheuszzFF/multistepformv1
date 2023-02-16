@@ -20,7 +20,7 @@
 </head>
 <body>
 
-  <!-- Sidebar start -->
+  
   <div class="container d-flex align-items-center justify-content-center">
     <div class="form d-flex align-items-center">
       <div class="form__left">
@@ -41,11 +41,19 @@
               <p> Select plan</p>
             </div>
           </div>
+
+          <div class="formSteps__list d-flex align-items-center" type="addOns" >
+            <h4>3</h4>
+            <div class="formSteps__list__box">
+              <span>Step 3</span>
+              <p>Add-ons</p>
+            </div>
+          </div>
         </div>
       </div>
 
       <!--step 1-->
-      <div class="form__right step1Box ">
+      <div class="form__right step1Box">
         <div class="info" for="info">
           <h2> Personal info</h2>
           <h4>  Please provide your name, email address, and phone number.</h4>
@@ -146,7 +154,58 @@
           <!--Montly/Year button-->
           <div class="info__label__buttons d-flex align-items-center justify-content-between">
             <button class="goBack"action="resetInfo">Go Back</button>
-            <button class="nextStep" id="finish" to="info">Submit</button>
+            <button class="nextStep" id="nextStep2" to="info">Next</button>
+          </div>
+        </div>
+      </div>
+
+      <!--Step 3-->
+      <div class="form__right step3Box d-none">
+        <div class="addOns" status="active" for="info">
+          <h2>Pick add-ons</h2>
+          <h4>Add-ons help  enhance your gaming experience.</h4>
+
+          <form action="">
+            <!--Online service-->
+            <fieldset>
+              <label for="online" class="d-flex">
+                <input type="checkbox" name="online" id="online">
+                <div class="contentBox">
+                  <h6>Online service</h6>
+                  <span>Acess to multiplayer games</span>
+                </div>
+                <span class="price">+$1/mo</span>
+              </label>
+            </fieldset>
+
+            <!--Larger Storage-->
+            <fieldset>
+              <label for="storage">
+                <input type="checkbox" name="storage" id="storage">
+                <div class="d-flex">
+                  <h6>Larger storage</h6>
+                  <span>Extra 1TB of cloud sabe</span>
+                </div>
+                <span class="price">+$2/mo</span>
+              </label>
+            </fieldset>
+
+            <!--Customizable profile-->
+            <fieldset>
+              <label for="storage">
+                <input type="checkbox" name="storage" id="storage">
+                <div class="d-flex">
+                  <h6>Customizable profile</h6>
+                  <span>Custom theme on your profile</span>
+                </div>
+                <span class="price">+$2/mo</span>
+              </label>
+            </fieldset>
+          </form>
+
+          <div class="info__label__buttons d-flex align-items-center justify-content-between">
+            <button class="goBack"action="resetInfo">Go Back</button>
+            <button class="nextStep" id="nextStep3" to="info">Next</button>
           </div>
         </div>
       </div>

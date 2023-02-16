@@ -5,6 +5,8 @@ const step3Box = document.querySelector('.step3Box');
 //left side
 const step1 = document.querySelector('.formSteps__list[type="info"]');
 const step2 = document.querySelector('.formSteps__list[type="plans"]');
+const step3 = document.querySelector('.formSteps__list[type="addOns"]');
+
 
 let emailTemplate = {
     'name': "",
@@ -20,9 +22,10 @@ function validateName(input) {
         'length' : document.getElementById('nameError2'),
         'specialCharacters' : document.getElementById('nameError3'),
     }
-    errors['notFilled'].classList.remove('show');
-    errors['length'].classList.remove('show');
-    errors['specialCharacters'].classList.remove('show');
+
+    for(let error in errors) {
+        errors[error].classList.remove('active');
+    };
 
 
     if(!nameRegex.test(name)) {
@@ -33,7 +36,6 @@ function validateName(input) {
         else if (name.length < 3) 
             errors['length'].classList.add('show');
         else return name;
-        
     }  
 }
 
@@ -43,7 +45,7 @@ function validateEmail(input) {
     let error_el = document.getElementById('emailError')
     email.toLowerCase();
 
-    if(!email.match(regexEmail) || email == "") {
+    if(!regexEmail.test(email) || email == "") {
         error_el.classList.add('show');
         return false;
 
@@ -58,7 +60,7 @@ function validatePhone(input) {
     let phone = input.value;
     let error_el = document.getElementById('phoneError');
 
-    if(!phone.match(regexPhone) || phone.length < 8 || phone == "") {
+    if(!regexPhone.test(phone) || phone.length < 8 || phone == "") {
         error_el.classList.add('show');
         return false;
     } else {
@@ -87,6 +89,7 @@ function validateStep1() {
         return emailTemplate
     }
 }
+
 function goBackListener(actualStep, actualStepLeft, backStep, backStepLeft) {
     let goBack_el = document.querySelector('.step2Box .goBack');
     goBack_el.addEventListener('click', () => {
@@ -94,6 +97,7 @@ function goBackListener(actualStep, actualStepLeft, backStep, backStepLeft) {
         actualStepLeft.classList.remove('active');
         backStep.classList.remove('d-none');
         backStepLeft.classList.add('active');
+        console.log(actualStepLeft.classList.remove('active'));
 
         initForm();
     })
@@ -106,9 +110,11 @@ function activeStep2() {
     step2.classList.add('active');
 }
 
-function validateStep2() {
-    let chosedPlan = getThePlanChoosed();
-    return switchYearlyMonthly(chosedPlan);
+function activeStep3() {
+    step2Box.classList.add('d-none');
+    step3Box.classList.remove('d-none');
+    step2.classList.remove('active');
+    step3.classList.add('active');
 }
 
 function getThePlanChoosed() {
@@ -126,7 +132,7 @@ function getThePlanChoosed() {
                 plansCheckboxes[i].checked = false;
                 plansCheckboxes[i].removeAttribute('status');
             }
-            checkbox.setAttribute('status','choosed')
+            checkbox.setAttribute('status','choosed');
             checkbox.checked = true;
             plansTemplate.plan = checkbox.id;
             return plansTemplate;
@@ -152,6 +158,15 @@ function switchYearlyMonthly(template) {
     return template
 }
 
+function validateStep2() {
+    let chosedPlan = getThePlanChoosed();
+    return switchYearlyMonthly(chosedPlan);
+}
+
+
+
+
+
 function initForm() {
     let step1NextButton = document.getElementById('nextStep1');
     step1NextButton.addEventListener('click', () => {
@@ -162,10 +177,9 @@ function initForm() {
             goBackListener(step2Box,step2 ,step1Box, step1);
 
             if(plansInfos) {
-                let finish_el = document.getElementById('finish');
-                finish_el.addEventListener('click', () => {
-                    window.alert('Check the console!');
-                    console.log(emailInfos, plansInfos);
+                let nextStep2Btn = document.getElementById('nextStep2');
+                nextStep2Btn.addEventListener('click', () => {
+                    activeStep3();
                 })
                 
             } else {

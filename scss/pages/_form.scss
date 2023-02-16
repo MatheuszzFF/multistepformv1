@@ -323,6 +323,21 @@ body {
             }
         }
 
+        .addOns {
+            form {
+                margin-top: 35px;
+
+                fieldset {
+                    border: 1px solid $blue1;
+                    border-radius: 8px;
+
+                    label {
+                        
+                    }
+                }
+            }
+        }
+
         &.d-none {
             display: none;
         }

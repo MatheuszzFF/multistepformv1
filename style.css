@@ -4499,6 +4499,13 @@ body {
   border-radius: 50%;
   transition: 0.3s;
 }
+.form__right .addOns form {
+  margin-top: 35px;
+}
+.form__right .addOns form fieldset {
+  border: 1px solid hsl(213deg, 96%, 18%);
+  border-radius: 8px;
+}
 .form__right.d-none {
   display: none;
 }
