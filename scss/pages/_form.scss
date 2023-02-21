@@ -141,6 +141,17 @@ body {
                     color: $gray;
                     border-radius: 10px;
                     margin-bottom: 20px;
+
+                    
+                    &:invalid {
+                        border-color: red;
+                    }
+
+                    &:valid {
+                        border-color: green;
+                    }
+
+                    
                 }
 
                 &__buttons {
@@ -171,12 +182,6 @@ body {
                     }
                 }
 
-                span {
-                    display: none;
-                    &.show {
-                        display: block;
-                    }
-                }
 
             }
         }

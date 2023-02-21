@@ -54,7 +54,7 @@
 
       <!--step 1-->
       <div class="form__right step1Box">
-        <div class="info" for="info">
+        <form class="info">
           <h2> Personal info</h2>
           <h4>  Please provide your name, email address, and phone number.</h4>
 
@@ -62,18 +62,14 @@
             <!--Name-->
             <fieldset>
               <label for="name" type="text">Name</label>
-              <input class="step1" name="name"></input>
-              <span id="nameError1">Name Required</span>
-              <span id="nameError2">Name must have 3 or more characters</span>
-              <span id="nameError3">Special characters are not allowed!</span>
+              <input class="step1" name="name" pattern="^([a-zA-Z]|\s)*$" minlength="3" onkeyup="validateName(this)" required></input>
             </fieldset>
             <!--Name-->
 
             <!--Email Adress-->
             <fieldset>
               <label for="email">Email</label>
-              <input class="step1" name="email" type="email"></input>
-              <span id="emailError">Insert a valid email!</span>
+              <input class="step1" name="email" type="email" required></input>
             </fieldset>
             <!--Email Adress-->
 
@@ -81,17 +77,15 @@
             <!--Phone Number-->
             <fieldset>
               <label for="phone">Phone Number</label>
-              <input class="step1" name="phone" type="tel"></input>
-              <span id="phoneError">Insert a valid phone number! *(no special characters allowed)</span>
+              <input class="step1" name="phone" type="tel" minlength="6" pattern="[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$" onkeyup="validatePhone(this)" required></input>
             </fieldset>
             <!--Phone Number-->
 
-
             <div class="info__label__buttons d-flex align-items-center justify-content-between">
-              <button class="nextStep" id="nextStep1" to="info">Next Step</button>
+              <input class="nextStep" type="submit" id="nextStep1" >
             </div>
           </div>
-        </div>
+        </form>
       </div>
 
       <!--Step 2-->
@@ -154,7 +148,7 @@
           <!--Montly/Year button-->
           <div class="info__label__buttons d-flex align-items-center justify-content-between">
             <button class="goBack"action="resetInfo">Go Back</button>
-            <button class="nextStep" id="nextStep2" to="info">Next</button>
+            <input class="nextStep" id="nextStep2" type="submit" to="info">Next</input>
           </div>
         </div>
       </div>
@@ -211,7 +205,7 @@
 
           <div class="info__label__buttons d-flex align-items-center justify-content-between">
             <button class="goBack"action="resetInfo">Go Back</button>
-            <button class="nextStep" id="nextStep3" to="info">Next</button>
+            <input class="nextStep" id="nextStep3" type="submit" to="info">Next Step</input>
           </div>
         </div>
       </div>
@@ -220,3 +214,5 @@
   <script src="js/main.js"></script>
 </body>
 </html>
+
+

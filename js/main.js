@@ -1,18 +1,13 @@
 const step1Box = document.querySelector('.step1Box');
-const step2Box = document.querySelector('.step2Box');
-const step3Box = document.querySelector('.step3Box');
-
-//left side
 const step1 = document.querySelector('.formSteps__list[type="info"]');
+
+const step2Box = document.querySelector('.step2Box');
 const step2 = document.querySelector('.formSteps__list[type="plans"]');
+
+const step3Box = document.querySelector('.step3Box');
 const step3 = document.querySelector('.formSteps__list[type="addOns"]');
 
-
-let emailTemplate = {
-    'name': "",
-    'email': "",
-    'phone': ""
-};
+//left side
 
 let addOns = {
     'online' : {
@@ -33,78 +28,22 @@ let addOns = {
 };
 
 function validateName(input) {
-    const nameRegex = /^[a-zA-Zá-ú ]+$/
-    let name = input.value;
-    let errors = { //error spans from HTML
-        'notFilled': document.getElementById('nameError1'),
-        'length' : document.getElementById('nameError2'),
-        'specialCharacters' : document.getElementById('nameError3'),
-    }
-
-    for(let error in errors) {
-        errors[error].classList.remove('active');
-    };
-
-
-    if(!nameRegex.test(name)) {
-        errors['specialCharacters'].classList.add('show');
-    } else {
-        if (name == "")
-        errors['notFilled'].classList.add('show');
-        else if (name.length < 3) 
-            errors['length'].classList.add('show');
-        else return name;
-    }  
-}
-
-function validateEmail(input) {
-    const regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    let email = input.value;
-    let error_el = document.getElementById('emailError')
-    email.toLowerCase();
-
-    if(!regexEmail.test(email) || email == "") {
-        error_el.classList.add('show');
-        return false;
-    }
-
-    error_el.classList.remove('show');
-    return email;
+        if (input.validity.tooShort) input.setCustomValidity('Name must have three or more letters');
+        else if(input.validity.patternMismatch)  input.setCustomValidity('Cannot have special characters');
+        else input.setCustomValidity("");
+        input.reportValidity();
 }
 
 function validatePhone(input) {
-    const regexPhone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-    let phone = input.value;
-    let error_el = document.getElementById('phoneError');
-
-    if(!regexPhone.test(phone) || phone.length < 8 || phone == "") {
-        error_el.classList.add('show');
-        return false;
-    } else {
-        error_el.classList.remove('show');
-        return phone
-    }
+        if (input.validity.tooShort) input.setCustomValidity('Number must have 10 or more numbers');
+        else input.setCustomValidity("");
+        input.reportValidity();
 }
 
-
-function validateStep1() {
-    const nameInput = document.querySelector('.step1[name="name"]');
-    const emailInput = document.querySelector('.step1[name="email"]');
-    const phoneInput = document.querySelector('.step1[name="phone"]');
+function validateStep1(emailTemplate) {
     let validateStepArray = [];
-    emailTemplate['name'] = validateName(nameInput);
-    emailTemplate['email'] = validateEmail(emailInput);
-    emailTemplate['phone'] = validatePhone(phoneInput);
-
-    for(let info in emailTemplate) {
-        emailTemplate[info] ? validateStepArray.push(true) : validateStepArray.push(false);
-    }
-
-    if(validateStepArray.includes(false)) 
-        return false
-    else {
-        return emailTemplate
-    }
+    for(let info in emailTemplate) emailTemplate[info] ? validateStepArray.push(true) : validateStepArray.push(false);
+    if(!validateStepArray.includes(false)) return emailTemplate
 }
 
 function goBackListener(actualStep, actualStepLeft, backStep, backStepLeft) {
@@ -189,9 +128,19 @@ function validateStep2() {
 }
 
 function initForm() {
-    let step1NextButton = document.getElementById('nextStep1');
-    step1NextButton.addEventListener('click', () => {
-        let emailInfos = validateStep1();
+    const nameInput = document.querySelector('.step1[name="name"]');
+    const emailInput = document.querySelector('.step1[name="email"]');
+    const phoneInput = document.querySelector('.step1[name="phone"]');
+    let formInfos = document.querySelector('form.info');
+    
+    formInfos.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let emailTemplate = {
+        'name': nameInput.value,
+        'email': emailInput.value,
+        'phone': phoneInput.value
+    };
+        let emailInfos = validateStep1(emailTemplate);
         if(emailInfos) {
             let plansInfos = validateStep2();
             activeStep2();
@@ -203,7 +152,6 @@ function initForm() {
                     activeStep3();
                     addOnsChoose();
                 })
-                
             } else {
                 console.log('ops,error');
             }

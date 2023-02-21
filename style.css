@@ -4352,6 +4352,12 @@ body {
   border-radius: 10px;
   margin-bottom: 20px;
 }
+.form__right .info__label input:invalid {
+  border-color: red;
+}
+.form__right .info__label input:valid {
+  border-color: green;
+}
 .form__right .info__label__buttons {
   margin-top: 30px;
 }
@@ -4373,12 +4379,6 @@ body {
   margin: 0;
   color: hsl(231deg, 11%, 63%);
   background-color: hsl(231deg, 100%, 99%);
-}
-.form__right .info__label span {
-  display: none;
-}
-.form__right .info__label span.show {
-  display: block;
 }
 .form__right .plans {
   height: 100%;
@@ -4513,10 +4513,6 @@ body {
 .form__right .addOns form fieldset label input {
   display: none;
 }
-.form__right .addOns form fieldset label input:checked ~ .checkmark {
-  background-color: hsl(243deg, 100%, 62%);
-  background-image: url(/assets/images/checkmarkIcon.png);
-}
 .form__right .addOns form fieldset label .checkmark {
   display: block;
   height: 20px;
@@ -4552,6 +4548,10 @@ body {
 }
 .form__right .addOns form fieldset.active {
   border: 1px solid hsl(243deg, 100%, 62%);
+}
+.form__right .addOns form fieldset.active input:checked ~ .checkmark {
+  background-color: hsl(243deg, 100%, 62%);
+  background-image: url(/assets/images/checkmarkIcon.png);
 }
 .form__right.d-none {
   display: none;
