@@ -14,6 +14,24 @@ let emailTemplate = {
     'phone': ""
 };
 
+let addOns = {
+    'online' : {
+        name: 'online',
+        price: '$2',
+        choosed: false
+    },
+    'storage' : {
+        name: 'storage',
+        price: '$2',
+        choosed: false
+    },
+    'customise' : {
+        name: 'customise',
+        price: '$1',
+        choosed: false
+    }
+};
+
 function validateName(input) {
     const nameRegex = /^[a-zA-Zá-ú ]+$/
     let name = input.value;
@@ -48,11 +66,10 @@ function validateEmail(input) {
     if(!regexEmail.test(email) || email == "") {
         error_el.classList.add('show');
         return false;
-
-    } else {
-        error_el.classList.remove('show');
-        return email;
     }
+
+    error_el.classList.remove('show');
+    return email;
 }
 
 function validatePhone(input) {
@@ -117,6 +134,16 @@ function activeStep3() {
     step3.classList.add('active');
 }
 
+function addOnsChoose() {
+    let checkboxes = document.querySelectorAll('.add-ons input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('click', (e) => {
+            checkbox.parentNode.parentNode.classList.toggle('active');
+            addOns[checkbox.id].choosed = checkbox.checked;
+        })
+    })
+}
+
 function getThePlanChoosed() {
     let plansTemplate = {
         plan: "arcade",
@@ -152,20 +179,14 @@ function switchYearlyMonthly(template) {
             let priceText = regexExpression[1] > 15 ? regexExpression[1] / 12 : regexExpression[1] * 12;
             let yearOrMonth = regexExpression[2] === "month" ? "year" : "month";
             price.innerHTML = `$${priceText}/${yearOrMonth}`;
-            return template;
         })
     })
-    return template
 }
 
 function validateStep2() {
     let chosedPlan = getThePlanChoosed();
     return switchYearlyMonthly(chosedPlan);
 }
-
-
-
-
 
 function initForm() {
     let step1NextButton = document.getElementById('nextStep1');
@@ -180,6 +201,7 @@ function initForm() {
                 let nextStep2Btn = document.getElementById('nextStep2');
                 nextStep2Btn.addEventListener('click', () => {
                     activeStep3();
+                    addOnsChoose();
                 })
                 
             } else {
