@@ -41,12 +41,6 @@ function validatePhone(input) {
         input.reportValidity();
 }
 
-function validateStep1(emailTemplate) {
-    let validateStepArray = [];
-    for(let info in emailTemplate) emailTemplate[info] ? validateStepArray.push(true) : validateStepArray.push(false);
-    if(!validateStepArray.includes(false)) return emailTemplate
-}
-
 function addOnsChoose() {
     let checkboxes = document.querySelectorAll('.add-ons input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
@@ -103,18 +97,25 @@ function initForm() {
     const emailInput = document.querySelector('.step1[name="email"]');
     const phoneInput = document.querySelector('.step1[name="phone"]');
     let formInfos = document.querySelector('form.info');
+    let formPlans = document.querySelector('form.plans');
+
     
     formInfos.addEventListener('submit', (e) => {
         e.preventDefault();
         let emailTemplate = {};
         emailTemplate = {
-        'name': nameInput.value,
-        'email': emailInput.value,
-        'phone': phoneInput.value
-    };
+            'name': nameInput.value,
+            'email': emailInput.value,
+            'phone': phoneInput.value
+        };
         activeStep(1);
-        let emailInfos = validateStep1(emailTemplate);
-        let plansInfos = validateStep2();
+        
+        formPlans.addEventListener('submit', (e) => {
+            let plansInfos = validateStep2();
+            e.preventDefault();
+            console.log(plansInfos);
+            activeStep(2);
+        })
     });
 }
 initForm();

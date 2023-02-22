@@ -90,7 +90,7 @@
 
       <!--Step 2-->
       <div class="form__right step2Box d-none js-step2-box">
-        <div class="plans" status="active" for="info">
+        <form class="plans" for="info">
           <h2>Select your plan</h2>
           <h4>You have the option of monthly or yearly billing.</h4>
 
@@ -137,14 +137,14 @@
           </div>
 
           <!--Montly/Year button-->
-          <div class="plans__monthly">
+          <fieldset class="plans__monthly">
             <label for="monthly">
               <input type="checkbox" id="monthly">
               <span id="monthlyChoice" class="choosed">Monthly</span>
               <div class="radioButton"></div>
               <span id="yearlyChoice">Yearly</span>
             </label>
-          </div>
+          </fieldset>
           <!--Montly/Year button-->
           <div class="info__label__buttons d-flex align-items-center justify-content-between">
             <button class="goBack"action="resetInfo">Go Back</button>
