@@ -1,11 +1,11 @@
-const step1Box = document.querySelector('.step1Box');
-const step1 = document.querySelector('.formSteps__list[type="info"]');
+const toggleClass = (element) => element.parentNode.classList.contains('formSteps') ? element.classList.toggle('active') : element.classList.toggle('d-none');
 
-const step2Box = document.querySelector('.step2Box');
-const step2 = document.querySelector('.formSteps__list[type="plans"]');
 
-const step3Box = document.querySelector('.step3Box');
-const step3 = document.querySelector('.formSteps__list[type="addOns"]');
+function activeStep(step) {
+    let step_els = [document.querySelectorAll('.js-step1-box'), document.querySelectorAll('.js-step2-box'), document.querySelector('.js-step3-box')];
+    step_els[step - 1].forEach(step_El => toggleClass(step_El));
+    step_els[step].forEach(step_El => toggleClass(step_El))
+}
 
 //left side
 
@@ -28,6 +28,7 @@ let addOns = {
 };
 
 function validateName(input) {
+        console.log(input.validity);
         if (input.validity.tooShort) input.setCustomValidity('Name must have three or more letters');
         else if(input.validity.patternMismatch)  input.setCustomValidity('Cannot have special characters');
         else input.setCustomValidity("");
@@ -46,33 +47,6 @@ function validateStep1(emailTemplate) {
     if(!validateStepArray.includes(false)) return emailTemplate
 }
 
-function goBackListener(actualStep, actualStepLeft, backStep, backStepLeft) {
-    let goBack_el = document.querySelector('.step2Box .goBack');
-    goBack_el.addEventListener('click', () => {
-        actualStep.classList.add('d-none');
-        actualStepLeft.classList.remove('active');
-        backStep.classList.remove('d-none');
-        backStepLeft.classList.add('active');
-        console.log(actualStepLeft.classList.remove('active'));
-
-        initForm();
-    })
-}
-
-function activeStep2() {
-    step1Box.classList.add('d-none');
-    step2Box.classList.remove('d-none');
-    step1.classList.remove('active');
-    step2.classList.add('active');
-}
-
-function activeStep3() {
-    step2Box.classList.add('d-none');
-    step3Box.classList.remove('d-none');
-    step2.classList.remove('active');
-    step3.classList.add('active');
-}
-
 function addOnsChoose() {
     let checkboxes = document.querySelectorAll('.add-ons input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
@@ -89,16 +63,9 @@ function getThePlanChoosed() {
         payment: 'monthly',
     }
     let plansCheckboxes = document.querySelectorAll('.plans input[type="checkbox"]:not(#monthly)');
-    plansCheckboxes[0].setAttribute('status','choosed');
-    plansCheckboxes[0].checked = true;
-   
     plansCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change',  () => {
-            for(let i = 0; i < plansCheckboxes.length; i++) {
-                plansCheckboxes[i].checked = false;
-                plansCheckboxes[i].removeAttribute('status');
-            }
-            checkbox.setAttribute('status','choosed');
+            for(let i = 0; i < plansCheckboxes.length; i++) plansCheckboxes[i].checked = false;
             checkbox.checked = true;
             plansTemplate.plan = checkbox.id;
             return plansTemplate;
@@ -107,18 +74,22 @@ function getThePlanChoosed() {
     return plansTemplate;
 }
 
+function changeTextInSwitch(regex) {
+    let prices_el = document.querySelectorAll('.plans__box span');
+    prices_el.forEach(price => {
+        let regexExpression = price.innerHTML.match(regex);
+        let priceText = regexExpression[1] > 15 ? regexExpression[1] / 12 : regexExpression[1] * 12;
+        let yearOrMonth = regexExpression[2] === "month" ? "year" : "month";
+        price.innerHTML = `$${priceText}/${yearOrMonth}`;
+    })
+}
+
 function switchYearlyMonthly(template) {
     let monthlyRadioBtn = document.querySelector('#monthly');
+    let regexPrices = /\$([0-9]+)\/([a-z]+)/;
     monthlyRadioBtn.addEventListener('change', () => {
-        const regexPrices = /\$([0-9]+)\/([a-z]+)/;
-        let prices_el = document.querySelectorAll('.plans__box span');
         template.payment === 'monthly' ? template.payment = 'yearly' : template.payment = 'monthly';
-        prices_el.forEach(price => {
-            let regexExpression = price.innerHTML.match(regexPrices);
-            let priceText = regexExpression[1] > 15 ? regexExpression[1] / 12 : regexExpression[1] * 12;
-            let yearOrMonth = regexExpression[2] === "month" ? "year" : "month";
-            price.innerHTML = `$${priceText}/${yearOrMonth}`;
-        })
+        changeTextInSwitch(regexPrices);
     })
 }
 
@@ -135,29 +106,17 @@ function initForm() {
     
     formInfos.addEventListener('submit', (e) => {
         e.preventDefault();
-        let emailTemplate = {
+        let emailTemplate = {};
+        emailTemplate = {
         'name': nameInput.value,
         'email': emailInput.value,
         'phone': phoneInput.value
     };
+        activeStep(1);
         let emailInfos = validateStep1(emailTemplate);
-        if(emailInfos) {
-            let plansInfos = validateStep2();
-            activeStep2();
-            goBackListener(step2Box,step2 ,step1Box, step1);
-
-            if(plansInfos) {
-                let nextStep2Btn = document.getElementById('nextStep2');
-                nextStep2Btn.addEventListener('click', () => {
-                    activeStep3();
-                    addOnsChoose();
-                })
-            } else {
-                console.log('ops,error');
-            }
-        } else {
-            console.log('error');
-        }
+        let plansInfos = validateStep2();
     });
 }
 initForm();
+
+// Utilizar os activate steps para resetar as infos através do goBack, declarando o template do email dentro de cada devido step
