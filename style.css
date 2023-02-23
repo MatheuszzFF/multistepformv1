@@ -4499,21 +4499,21 @@ body {
   border-radius: 50%;
   transition: 0.3s;
 }
-.form__right .addOns form {
+.form__right .addOns {
   margin-top: 35px;
 }
-.form__right .addOns form fieldset {
+.form__right .addOns fieldset {
   border: 1px solid hsl(229deg, 24%, 87%);
   border-radius: 8px;
 }
-.form__right .addOns form fieldset label {
+.form__right .addOns fieldset label {
   padding: 14px 30px;
   align-items: center;
 }
-.form__right .addOns form fieldset label input {
+.form__right .addOns fieldset label input {
   display: none;
 }
-.form__right .addOns form fieldset label .checkmark {
+.form__right .addOns fieldset label .checkmark {
   display: block;
   height: 20px;
   width: 22px;
@@ -4525,31 +4525,31 @@ body {
   background-position: center center;
   background-repeat: no-repeat;
 }
-.form__right .addOns form fieldset label .contentBox {
+.form__right .addOns fieldset label .contentBox {
   margin-left: 20px;
 }
-.form__right .addOns form fieldset label .contentBox h6 {
+.form__right .addOns fieldset label .contentBox h6 {
   font-size: 16px;
   font-weight: 600;
   color: hsl(213deg, 96%, 18%);
   margin-bottom: 5px;
 }
-.form__right .addOns form fieldset label .contentBox span {
+.form__right .addOns fieldset label .contentBox span {
   font-size: 14px;
   font-weight: 400;
   color: hsl(231deg, 11%, 63%);
 }
-.form__right .addOns form fieldset label .price {
+.form__right .addOns fieldset label .price {
   display: block;
   margin-left: auto;
 }
-.form__right .addOns form fieldset + fieldset {
+.form__right .addOns fieldset + fieldset {
   margin-top: 30px;
 }
-.form__right .addOns form fieldset.active {
+.form__right .addOns fieldset.active {
   border: 1px solid hsl(243deg, 100%, 62%);
 }
-.form__right .addOns form fieldset.active input:checked ~ .checkmark {
+.form__right .addOns fieldset.active input:checked ~ .checkmark {
   background-color: hsl(243deg, 100%, 62%);
   background-image: url(/assets/images/checkmarkIcon.png);
 }

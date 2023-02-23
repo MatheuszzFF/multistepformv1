@@ -150,16 +150,16 @@
             <button class="goBack"action="resetInfo">Go Back</button>
             <input class="nextStep" id="nextStep2" type="submit" to="info" onsubmit="activeStep(2)">Next</input>
           </div>
-        </div>
+        </form>
       </div>
 
       <!--Step 3-->
       <div class="form__right step3Box d-none js-step3-box">
-        <div class="addOns" status="active" for="info">
+        <form class="addOns" status="active" for="info">
           <h2>Pick add-ons</h2>
           <h4>Add-ons help  enhance your gaming experience.</h4>
 
-          <form action="">
+          <div >
             <!--Online service-->
             <fieldset class="add-ons" data-field="online">
               <label for="online" class="d-flex">
@@ -172,7 +172,6 @@
                 <span class="price">+$1/mo</span>
               </label>
             </fieldset>
-
             
             <!--Larger Storage-->
             <fieldset class="add-ons" data-field="storage">
@@ -187,8 +186,6 @@
               </label>
             </fieldset>
 
-            
-
             <!--Customizable profile-->
             <fieldset class="add-ons" data-field="customise">
               <label for="customise" class="d-flex">
@@ -201,13 +198,13 @@
                 <span class="price">+$1/mo</span>
               </label>
             </fieldset>
-          </form>
+          </div>
 
           <div class="info__label__buttons d-flex align-items-center justify-content-between">
             <button class="goBack"action="resetInfo">Go Back</button>
             <input class="nextStep" id="nextStep3" type="submit" to="info">Next Step</input>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>

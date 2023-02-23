@@ -329,76 +329,74 @@ body {
         }
 
         .addOns {
-            form {
-                margin-top: 35px;
+            margin-top: 35px;
 
-                fieldset {
-                    border: 1px solid $gray2;
-                    border-radius: 8px;
+            fieldset {
+                border: 1px solid $gray2;
+                border-radius: 8px;
 
-                    label {
-                        padding: 14px 30px;
-                        align-items: center;
+                label {
+                    padding: 14px 30px;
+                    align-items: center;
 
-                        input {
-                            display: none;
-                        }
-
-                        .checkmark {
-                            display: block;
-                            height: 20px;
-                            width: 22px;
-                            border-radius: 3px;
-                            border: 1px solid $blue2;
-                            background-color: $white;
-                            transition: .3s;
-                            background: {
-                                size: 8px;
-                                position: center center;
-                                repeat: no-repeat;
-                            }
-                        }
-
-                        .contentBox {
-                            margin-left: 20px;
-
-                            h6 {
-                                font: {
-                                    size: 16px;
-                                    weight: $fontBold;
-                                }
-                                color: $blue1;
-                                margin-bottom: 5px;
-                            }
-
-                            span {
-                                font: {
-                                    size: 14px;
-                                    weight: $fontRegular;
-                                }
-                                color: $gray;
-                            }
-                        }
-                        .price {
-                            display: block;
-                            margin-left: auto;
-                        }
+                    input {
+                        display: none;
                     }
 
-                    + fieldset {
-                        margin-top: 30px;
-                    }
-
-                    &.active {
+                    .checkmark {
+                        display: block;
+                        height: 20px;
+                        width: 22px;
+                        border-radius: 3px;
                         border: 1px solid $blue2;
-                        input {
-                            &:checked {
-                                ~ .checkmark {
-                                    background: {
-                                        color: $blue2;
-                                        image: url(/assets/images/checkmarkIcon.png);
-                                       
-                                    }
+                        background-color: $white;
+                        transition: .3s;
+                        background: {
+                            size: 8px;
+                            position: center center;
+                            repeat: no-repeat;
+                        }
+                    }
+
+                    .contentBox {
+                        margin-left: 20px;
+
+                        h6 {
+                            font: {
+                                size: 16px;
+                                weight: $fontBold;
+                            }
+                            color: $blue1;
+                            margin-bottom: 5px;
+                        }
+
+                        span {
+                            font: {
+                                size: 14px;
+                                weight: $fontRegular;
+                            }
+                            color: $gray;
+                        }
+                    }
+                    .price {
+                        display: block;
+                        margin-left: auto;
+                    }
+                }
+
+                + fieldset {
+                    margin-top: 30px;
+                }
+
+                &.active {
+                    border: 1px solid $blue2;
+                    input {
+                        &:checked {
+                            ~ .checkmark {
+                                background: {
+                                    color: $blue2;
+                                    image: url(/assets/images/checkmarkIcon.png);
+                                    
                                 }
                             }
                         }

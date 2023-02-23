@@ -1,10 +1,10 @@
 const toggleClass = (element) => element.parentNode.classList.contains('formSteps') ? element.classList.toggle('active') : element.classList.toggle('d-none');
 
-
 function activeStep(step) {
-    let step_els = [document.querySelectorAll('.js-step1-box'), document.querySelectorAll('.js-step2-box'), document.querySelector('.js-step3-box')];
+    let step_els = [document.querySelectorAll('.js-step1-box'), document.querySelectorAll('.js-step2-box'), document.querySelectorAll('.js-step3-box')];
+    console.log(step_els[1]);
     step_els[step - 1].forEach(step_El => toggleClass(step_El));
-    step_els[step].forEach(step_El => toggleClass(step_El))
+    step_els[step].forEach(step_El => toggleClass(step_El));
 }
 
 //left side
@@ -41,22 +41,12 @@ function validatePhone(input) {
         input.reportValidity();
 }
 
-function addOnsChoose() {
-    let checkboxes = document.querySelectorAll('.add-ons input[type="checkbox"]');
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('click', (e) => {
-            checkbox.parentNode.parentNode.classList.toggle('active');
-            addOns[checkbox.id].choosed = checkbox.checked;
-        })
-    })
-}
-
 function getThePlanChoosed() {
+    let plansCheckboxes = document.querySelectorAll('.plans input[type="checkbox"]:not(#monthly)');
     let plansTemplate = {
         plan: "arcade",
         payment: 'monthly',
     }
-    let plansCheckboxes = document.querySelectorAll('.plans input[type="checkbox"]:not(#monthly)');
     plansCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change',  () => {
             for(let i = 0; i < plansCheckboxes.length; i++) plansCheckboxes[i].checked = false;
@@ -84,12 +74,26 @@ function switchYearlyMonthly(template) {
     monthlyRadioBtn.addEventListener('change', () => {
         template.payment === 'monthly' ? template.payment = 'yearly' : template.payment = 'monthly';
         changeTextInSwitch(regexPrices);
+        return template;
     })
+    return template;
 }
 
 function validateStep2() {
     let chosedPlan = getThePlanChoosed();
     return switchYearlyMonthly(chosedPlan);
+}
+
+function addOnsChoose() {
+    let checkboxes = document.querySelectorAll('.add-ons input[type="checkbox"]');
+    let addOns = [];
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', (e) => {
+            checkbox.parentNode.parentNode.classList.toggle('active');
+            checkbox.checked ? addOns.push(checkbox.id) : addOns.splice(addOns.indexOf(checkbox.id), 1);
+        })
+    })
+    return addOns;
 }
 
 function initForm() {
@@ -98,23 +102,33 @@ function initForm() {
     const phoneInput = document.querySelector('.step1[name="phone"]');
     let formInfos = document.querySelector('form.info');
     let formPlans = document.querySelector('form.plans');
+    let formAddons = document.querySelector('form.addOns');
 
     
     formInfos.addEventListener('submit', (e) => {
-        e.preventDefault();
-        let emailTemplate = {};
-        emailTemplate = {
+        let emailTemplate = {
             'name': nameInput.value,
             'email': emailInput.value,
             'phone': phoneInput.value
         };
+        let plansInfos = validateStep2();
+        e.preventDefault();
         activeStep(1);
         
         formPlans.addEventListener('submit', (e) => {
-            let plansInfos = validateStep2();
+            let addOns = addOnsChoose();
             e.preventDefault();
-            console.log(plansInfos);
             activeStep(2);
+
+            formAddons.addEventListener('submit', (e) => {
+                let finalTemplate = {
+                    'infos' : emailTemplate,
+                    'plan' : plansInfos,
+                    'addons' : addOns
+                }
+                e.preventDefault();
+                console.log(finalTemplate);
+            })
         })
     });
 }
