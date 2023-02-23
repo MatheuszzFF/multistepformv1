@@ -7,7 +7,7 @@ function activeStep(step) {
     step_els[step].forEach(step_El => toggleClass(step_El));
 }
 
-//left side
+
 
 let addOns = {
     'online' : {
@@ -133,5 +133,3 @@ function initForm() {
     });
 }
 initForm();
-
-// Utilizar os activate steps para resetar as infos através do goBack, declarando o template do email dentro de cada devido step
